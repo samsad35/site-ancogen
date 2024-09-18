@@ -104,62 +104,52 @@
 		<div class="row">
 			<section class="12u">
 
-				<h1 style="text-align: center; font-size: xx-large;	">
+				<h1 style="text-align: center; font-size: xxx-large;">
 					AnCoGen: Analysis, Control and Generation of Speech with a Masked Autoencoder
 				</h1>
+				<h4 style="text-align: center; font-size: large;">
+					Samir Sadok<sup>1</sup>&emsp;&emsp; Simon Leglaive<sup>2</sup>&emsp;&emsp; Laurent Girin<sup>3</sup>&emsp;&emsp; Gaël Richard<sup>4</sup>&emsp;&emsp; Xavier Alameda-Pineda<sup>1</sup>&emsp;&emsp;
+				</h4>
 
-<!--				<p style="text-align: center;">-->
-<!--					Samir Sadok<sup>1</sup>&emsp;&emsp; Simon Leglaive<sup>1</sup> &emsp;&emsp;&emsp;-->
-<!--				</p>-->
+				<p style="text-align: center;"><sup>1</sup>Inria at Univ. Grenoble Alpes, CNRS, LJK, France <br> <sup>2</sup>CentraleSupélec, IETR UMR CNRS 6164, France <br/>
+				<sup>3</sup>Univ. Grenoble Alpes, CNRS, Grenoble INP, GIPSA-lab, France <br>
+				<sup>4</sup>LTCI, Télécom Paris, Institut polytechnique de Paris, France
+			   </p>
 
-<!--				<p style="text-align: center; line-height: 100%;">-->
-<!--					<sup>1</sup>CentraleSupélec, IETR UMR CNRS 6164, France &emsp;&emsp; <br>-->
-<!--				</p>-->
-				<!--
-				<p style="text-align: center;">
-					Inproceedings
-				</p> 
-				-->
-
-				<p style="text-align: center;">
-					 <a href="http://github.com/samsad35/AnCoGen-article" target="_blank" rel="noopener" style="font-size: large">Article</a> |
+				<p style="text-align: center; font-size: large;">
+					 <a href="" target="_blank" rel="noopener">Article</a> |
 					<!-- <a href="#audio">Audio examples</a> |  -->
 <!--					 <a href="documents/presentation_icassp2020.pdf">Slides</a> |  -->
-					<a href="http://github.com/samsad35/AnCoGen-code" target="_blank" rel="noopener" style="font-size: large">Code (will be released soon)</a>
+					<a href="" target="_blank" rel="noopener">Code (will be released upon acceptance)</a>
 					<!-- <a href="https://hal.archives-ouvertes.fr/hal-03603791v1/bibtex" target="_blank" rel="noopener">Bibtex</a> | -->
 					<!-- <a href="#acknowledgement">Acknowledgement</a> -->
 				</p>
 
-				<!-- Abstract -->
-				<strong><span style="font-size: x-large;">Abstract</span></strong>
-				<hr>
-				<img src="demos/AnCoGen-high-level-2.svg" alt="ancogen" width="80%" style="display: block; margin: 0 auto;" />
+				<br>
+				<br>
+				<img src="demos/AnCoGen-high-level-2.svg" alt="ancogen" width="60%" style="display: block; margin: 0 auto;" />
+				<br>
+				<br>
 
-				<p style = "text-align: justify; vertical-align: top;">
-					This article introduces AnCoGen, a novel method that leverages masked autoencoders to unify the
-					analysis, control, and generation of audio speech within a single model. AnCoGen can analyze speech
-					by estimating key attributes such as speaker identity, pitch, content, loudness, signal-to-noise ratio,
-					and clarity index. Additionally, it can generate speech from these attributes and allows for precise
-					control of the synthesized speech by modifying them. Extensive experiments demonstrate AnCoGen's
-					effectiveness across various applications, including anaylsis-resynthesis, pitch estimation, pitch
-					manipulation, and speech enhancement.
-					<br>
-				</p>
-			<br>
-			<br>
+				<p>This website presents qualitative results obtained with AnCoGen, a masked autoencoder model for the analysis, control, and generation of speech. As illustrated in the above figure, AnCoGen relies on a masking strategy to provide a bidirectional mapping between a Mel-spectrogram and a set of speech attributes representing not only the linguistic content, prosody (pitch and loudness), and speaker identity, but also the acoustic recording conditions in terms of noise level and reverberation.</p>
+
+				<p>For speech analysis, AnCoGen takes a Mel-spectrogram as input and estimates the speech attributes. Conversely, for speech generation the model takes the speech attributes as input and predicts a Mel-spectrogram. The speech waveform is then reconstructed using a HiFi-GAN neural vocoder. Importantly, the analysis and the generation of speech are achieved by the same model, by masking either the speech attributes or the Mel-spectrogram at the input of AnCoGen. As shown in the qualitative examples below, we can address various speech processing tasks by controlling the speech attributes in between the analysis and generation steps: pitch shifting, speech denoising, dereverberation, voice conversion. </p>
+
+				<p>For more details about the model and the experimental setup, please refer to the paper.</p>
+				<br>
 
 			<!-- Analysis -->
 			<span style="font-size: x-large;"><strong>Analysis</strong></span>
 			<hr>
-				We perform an analysis process on audio speech data, which involves encoding audio speech sequences
-				(<span style="color:red">\(\mathbf{x}\) </span>) and decoding the the attributes (<span style="color:blue">\(\mathbf{A}_{1:6}\)</span>).
-			<br>
-			<br>
+
+			<p>In this section we present analysis results, which correspond to the estimation of the speech attributes from a Mel-spectrogram. In each of the figures below, the blue line represents the ground-truth attribute and the red line represents the prediction of AnCoGen. Please see the paper for a complete description of the attributes.</p>
+
+
 			<div style="width:100%; text-align: justify; border: 2px solid gray; padding: 10px;">
 				<div style="width:100%; padding: 10px; background-color: lightgray; border-radius: 8px; margin-bottom: 20px;">
 					<form id="menuFormAnalysis" style="display: flex; justify-content: space-evenly	; align-items: center;">
 						<div>
-							<label for="selectExample" style="font-size: medium;"><strong>Example to analyze:</strong></label>
+							<label for="selectExample" style="font-size: medium;"><strong>Select a speech sample to analyze:</strong></label>
 							<select id="selectExample" onclick="changeImage()" name="selectExample"  style="font-size: medium; margin-left: 10px;">
 								<option value="example 1">1</option>
 								<option value="example 2">2</option>
@@ -175,12 +165,7 @@
 					</td>
 				</table>
 
-				<div>
-					<u> The attributes</u>:
-					<br>
-					(Scroll to the right to see the other attributes) In each of these figures, the blue outline
-					represents the original attributes and the red represents the prediction of our approach (AnCoGen).
-				</div>
+				<p>Scroll to the right to see the different attributes.</p>
 
 				<div class="scroll-container">
 				  <img id="pitch" src="demos/analyzer/example 1/pitch.png" width="600" height="400">
@@ -195,35 +180,16 @@
 			<br>
 
 			<!-- Analysis-generation -->
-			<span style="font-size: x-large;"><strong>Analysis-generation</strong></span>
+			<span style="font-size: x-large;"><strong>Analysis-resynthesis</strong></span>
 			<hr>
-			<div class="container-row">
-			<!-- Section de texte -->
-				<div class="text-section">
-					<br>
-					<p style="text-align: justify">
-					We present some qualitative results of an analysis-<u>generation</u> process on audio speech data.
-					The analysis involves encoding audio speech sequences (<span style="color:red">\(\mathbf{x}\) </span>)
-					and decoding the attributes (<span style="color:blue">\(\mathbf{A}_{1:6}\) </span>).
-					Subsequently, the generation step consists of generating the audio sequence
-					(<span style="color:red">\(\mathbf{x}\) </span>) from these factors obtained without any modification,
-					intending to reconstruct the input sequence faithfully.
-					</p>
-				</div>
 
-				<!-- Section d'image -->
-				<div class="hero-image">
-					<img src="demos/analyzer-synthesizer.svg" alt="Speech Enhancement Diagram" width="550">
-				</div>
-			</div>
+			<p>This section presents speech analysis/resynthesis results, which are simply obtained by using AnCoGen to map a Mel-spectrogram to the corresponding speech attributes (analysis stage) and then back to the Mel-spectrogram (generation stage).</p>
 
-			<br>
-			<br>
 				<div style="width:100%; text-align: justify; border: 2px dashed Green; padding: 10px;">
 					<div style="width:100%; padding: 10px; background-color: lightgray; border-radius: 8px; margin-bottom: 20px;">
 					<form id="menuFormAnalysisGeneration" style="display: flex; justify-content: space-evenly	; align-items: center;">
 						<div>
-								<label for="seenunseenSelect" style="font-size: medium;"><strong>Option:</strong></label>
+								<label for="seenunseenSelect" style="font-size: medium;"><strong>Choose seen or unseen speakers:</strong></label>
 							<select id="seenunseenSelect" onclick="changeSeenunseen()" name="seenunseenSelect"  style="font-size: medium; margin-left: 10px;">
 								<option value="unseen">Unseen</option>
 								<option value="seen">Seen</option>
@@ -238,62 +204,43 @@
 							<button id="next" onclick="next()" style="border-radius: 10px; width: 200px;font-size: 18px; position: absolute}">Next &#8631;</button>
 						</div>
 					</div>
-					<br>
-					<br>
 					<table style="width:100%; text-align: center;">
 						<td style="text-align: center; border-right: solid 1px darkgreen;">
-							<p> <font size="+2">Original</font> </p>
-							<audio id="original_reconstruction" style="width: 200px" controls="controls" preload="none" src="demos/reconstruction/unseen/1_original.wav"></audio>
+							<p> <font size="+1">Original</font> </p>
+							<audio id="original_reconstruction" style="width: 300px" controls="controls" preload="none" src="demos/reconstruction/unseen/1_original.wav"></audio>
 						</td>
 
 						<td style="text-align: center">
-							<p> <font size="+2">Reconstruction with AnCoGeN (ours)</font> </p>
-							<audio id="rec_reconstruction" style="width: 200px" controls="controls" preload="none" src="demos/reconstruction/unseen/1_rec.wav"></audio>
+							<p> <font size="+1">Reconstruction with AnCoGeN</font> </p>
+							<audio id="rec_reconstruction" style="width: 300px" controls="controls" preload="none" src="demos/reconstruction/unseen/1_rec.wav"></audio>
 						</td>
-
 					</table>
 				</div>
 
 			<br>
 				<!-- Analysis-control-generation -->
 			<!-- speech enhancement -->
-			<span style="font-size: x-large;"><strong>Analysis-control-generation</strong></span>
+			<span style="font-size: x-large;"><strong>Analysis-transformation-synthesis</strong></span>
 			<hr>
-			<span style="font-size: large; color: darkblue"><strong>1- Speech enhancement</strong></span>
-				<br>
-			<div class="container-row">
-			<!-- Section de texte -->
-				<div class="text-section">
-					<p style="text-align: justify">
-						How to do speech enhancement with AnCoGen? For that, we perform an analysis-<u>control</u>-generation process on noisy audio speech data.
-					The analysis involves encoding noised audio speech sequences (<span style="color:red">\(\mathbf{x}\)</span>)
-					and decoding the attributes (<span style="color:blue">\(\mathbf{A}_{1:6}\)</span>).
-					Subsequently, the control step consists of controlling and manipulating the SNR. Concretely, we increase the
-					value of the SNR by +40 dB.
-					Lastly, the generation step synthesizes the audio sequence (<span style="color:red">\(\mathbf{x}\)</span>)
-					from these factors modified in order to denoise the audio speech signal.
-					</p>
-				</div>
 
-				<!-- Section d'image -->
-				<div class="hero-image">
-					<img src="demos/controler-se.svg" alt="Speech Enhancement Diagram" width="550">
-				</div>
-			</div>
-			<br>
-				<br>
+			<p>This section presents analysis, transformation, and synthesis results, where the speech attributes are controlled between the analysis and generation stages in order to perform speech denoising (by increasing the SNR attribute), pitch shifting, dereverberation (by increasing the C50 attribute) or voice conversion (by controlling the speaker identity attribute). Note that the paper only includes quantitative results for the speech denoising and pitch shifting tasks.</p>
+
+			<!--		Speech denoising		-->
+			<span style="font-size: large; color: darkblue"><strong>Speech denoising</strong></span>
+			<br><br>
+
 				<div style="width:100%; text-align: center; border: 2px solid #2c85a9; padding: 10px;">
 				<div style="width:100%; padding: 10px; background-color: lightgray; border-radius: 8px; margin-bottom: 20px;">
 				<form id="menuForm" style="display: flex; justify-content: space-evenly	; align-items: center;">
 					<div>
-						<label for="methodSelect" style="font-size: medium;"><strong>Method:</strong></label>
+						<label for="methodSelect" style="font-size: medium;"><strong>Select a method:</strong></label>
 						<select id="methodSelect" onclick="applyChanges()" name="methodSelect"  style="font-size: medium; margin-left: 10px;">
 							<option value="AnCoGen">AnCoGen (our)</option>
 							<option value="ConvTasNet">ConvTasNet</option>
 						</select>
 					</div>
 					<div>
-						<label for="databaseSelect" style="font-size: medium;"><strong>Database:</strong></label>
+						<label for="databaseSelect" style="font-size: medium;"><strong>Select a dataset:</strong></label>
 						<select id="databaseSelect" name="databaseSelect" style="font-size: medium; margin-left: 10px;">
 							<option value="mssnsd">MS-SNSD</option>
 							<option value="librispeech">LibriSpeech+DEMAND</option>
@@ -311,74 +258,36 @@
 						</div>
 					</div>
 					<br>
-					<br>
 					<table style="text-align: center; width:100%">
 						<td style="text-align: center; border-right: solid 1px darkblue;">
-							<p> <font size="+2">Noised</font> </p>
-							<audio id="noised_speech_enhancement" style="width: 200px" controls="controls" preload="none" src="demos/noise/mssnsd/AnCoGen/1_original.wav"></audio>
+							<p> <font size="+1">Noisy speech</font> </p>
+							<audio id="noised_speech_enhancement" style="width: 300px" controls="controls" preload="none" src="demos/noise/mssnsd/AnCoGen/1_original.wav"></audio>
 						</td>
 
 						<td style="text-align: center; border-right: solid 1px darkblue;">
-							<p> <font size="+2">Reconstruction </font> </p>
-							<audio id="denoised_speech_enhancement" style="width: 200px" controls="controls" preload="none" src="demos/noise/mssnsd/AnCoGen/1_rec.wav"></audio>
+							<p> <font size="+1">Estimated clean speech</font> </p>
+							<audio id="denoised_speech_enhancement" style="width: 300px" controls="controls" preload="none" src="demos/noise/mssnsd/AnCoGen/1_rec.wav"></audio>
 						</td>
 
 						<td style="text-align: center">
-							<p> <font size="+2">Original </font> </p>
-							<audio id="original_speech_enhancement" style="width: 200px" controls="controls" preload="none" src="demos/noise/mssnsd/AnCoGen/1_ref.wav"></audio>
+							<p> <font size="+1">Ground-truth clean speech </font> </p>
+							<audio id="original_speech_enhancement" style="width: 300px" controls="controls" preload="none" src="demos/noise/mssnsd/AnCoGen/1_ref.wav"></audio>
 						</td>
 					</table>
 				</div>
 
 				<br>
 
-				<p>
-					<u> What impact does the SNR control value have on speech enhancement</u>? AnCoGen operates through
-					an analysis-control-synthesis process. In the control step, we adjust SNR.
-					The figure below illustrates the effect of the SNR control value, showing two metrics (MOS and STOI)
-					to examine the correlation between the SNR of the noisy signal and the SNR control value.
-					The x-axis represents the SNR of the noisy audio signal, while the y-axis represents the SNR control value.
-					The findings indicate that increasing the SNR control value leads to greater denoising of the speech audio signal.
-				</p>
 
-				<table style="display: flex; justify-content: space-around; text-align: center;"">
-					<td>
-						<img src="demos/mos.svg" alt="ancogen" width="450" />
-					</td>
-					<td>
-						<img src="demos/stoi.svg" alt="ancogen" width="450" />
-					</td>
-				</table>
-
-				<br>
-
-		<!--		Voice conversion		-->
-		<span style="font-size: large; color: darkmagenta"><strong>2- Pitch manipulation</strong></span>
+		<!--		Pitch shifting		-->
+		<span style="font-size: large; color: darkmagenta"><strong>Pitch shifting</strong></span>
 		<br>
-		<div class="container-row">
-			<!-- Section de texte -->
-				<div class="text-section">
-					<p style="text-align: justify">
-						<br>
-						How to do pitch manipulation with AnCoGen? For that, we perform an analysis-<u>control</u>-generation process on audio speech data.
-					The analysis involves encoding audio speech sequences (<span style="color:red">\(\mathbf{x}\)</span>)
-					and decoding the attributes (<span style="color:blue">\(\mathbf{A}_{1:6}\)</span>).
-					Subsequently, the control step consists of controlling and manipulating the pitch.
-					Lastly, the generation step synthesizes the audio sequence (<span style="color:red">\(\mathbf{x}\)</span>) with the modified pitch.
-					</p>
-				</div>
-
-				<!-- Section d'image -->
-				<div class="hero-image">
-					<img src="demos/controler-pitch.svg" alt="Speech Enhancement Diagram" width="550">
-				</div>
-			</div>
 			<br>
 			<div style="width:100%; text-align: justify; border: 2px solid darkmagenta; padding: 10px;">
 			<div style="width:100%; padding: 10px; background-color: lightgray; border-radius: 8px; margin-bottom: 20px;">
 				<form id="menuForm-pitch" style="display: flex; justify-content: space-evenly	; align-items: center;">
 					<div>
-						<label for="exampleSelect_pitch" style="font-size: medium;"><strong>Example:</strong></label>
+						<label for="exampleSelect_pitch" style="font-size: medium;"><strong>Choose a speech sample:</strong></label>
 						<select id="exampleSelect_pitch" onclick="applyChanges_pitch()" name="exampleSelect_pitch"  style="font-size: medium; margin-left: 10px;">
 							<option value="1">1</option>
 							<option value="2">2</option>
@@ -386,7 +295,7 @@
 					</div>
 					<div>
 						<div class="slider-container">
-							<label for="mySlider">Pitch manipulation:</label>
+							<label for="mySlider"><strong>Choose a pitch shifting factor (%)</strong>:</label>
 							<input type="range" id="mySlider" min="-80" max="80" value="0" step="20" style="width: 200px;" oninput="updateValue(this.value)">
 							<span id="sliderValue">0</span>
 						</div>
@@ -401,35 +310,12 @@
 				</table>
 			</div>
 		<br>
-		<p style="color: indianred; text-align: center; background-color: lightgoldenrodyellow;"> (📢) The paper does not include detailed discussions on the applications of dereverberation and voice conversion. However, audio examples illustrating these applications are provided in the following sections.</p>
-		<br>
+
 
 		<!--		Deverberation		-->
-		<span style="font-size: large; color: slateblue"><strong>3- De-reverberation</strong></span>
+		<span style="font-size: large; color: slateblue"><strong>Dereverberation</strong></span>
 		<br>
-
-		<div class="container-row">
-			<!-- Section de texte -->
-				<div class="text-section">
-					<p style="text-align: justify">
-					How to do speech de-reverberation with AnCoGen? For that, we perform an analysis-<u>control</u>-generation
-					process on noisy audio speech data.
-					The analysis involves encoding noised audio speech sequences (<span style="color:red">\(\mathbf{x}\)</span>)
-					and decoding the attributes (<span style="color:blue">\(\mathbf{A}_{1:6}\)</span>).
-					Subsequently, the control step consists of controlling and manipulating the C50. Concretely, we increase the
-					value of the C50 by +50.
-					Lastly, the generation step synthesizes the audio sequence (<span style="color:red">\(\mathbf{x}\)</span>)
-					from these factors modified in order to denoise the audio speech signal.
-					</p>
-				</div>
-
-				<!-- Section d'image -->
-				<div class="hero-image">
-					<img src="demos/controler-dev.svg" alt="Speech Enhancement De-rev." width="550">
-				</div>
-			</div>
-
-			<br>
+		<br>
 
 			<div style="width:100%; text-align: justify; border: 2px solid slateblue; padding: 10px;">
 				<div style="text-align: center;">
@@ -440,33 +326,33 @@
 					</div>
 				</div>
 				<br>
-				<br>
 				<table style="width:100%; text-align: center;">
 					<td style="text-align: center; border-right: solid 1px darkred;">
-						<p> <font size="+1">Noised</font> </p>
-						<audio id="noised_dev" style="width: 200px" controls="controls" preload="none" src="demos/reverb/1_original.wav"></audio>
+						<p> <font size="+1">Reverberant speech</font> </p>
+						<audio id="noised_dev" style="width: 300px" controls="controls" preload="none" src="demos/reverb/1_original.wav"></audio>
 					</td>
-
 					<td style="text-align: center; border-right: solid 1px darkred;">
-						<p> <font size="+1">Reconstruction (ours)</font> </p>
-						<audio id="recon_dev" style="width: 200px" controls="controls" preload="none" src="demos/reverb/1_rec.wav"></audio>
+						<p> <font size="+1">Estimated clean speech</font> </p>
+						<audio id="recon_dev" style="width: 300px" controls="controls" preload="none" src="demos/reverb/1_rec.wav"></audio>
 					</td>
-
 					<td style="text-align: center">
-						<p> <font size="+1">Original</font> </p>
-						<audio id="original_dev" style="width: 200px" controls="controls" preload="none" src="demos/reverb/1_ref.wav"></audio>
+						<p> <font size="+1">Ground-truth clean speech</font> </p>
+						<audio id="original_dev" style="width: 300px" controls="controls" preload="none" src="demos/reverb/1_ref.wav"></audio>
 					</td>
-
 				</table>
 			</div>
 			<br>
 			<br>
 
+		<!--		Deverberation + denoising		-->
+		<span style="font-size: large; color: slateblue"><strong>Dereverberation + denoising</strong></span>
+		<br>
+		<br>
 		<div style="width:100%; text-align: justify; border: 2px solid slateblue; padding: 10px;">
 			<div style="width:100%; padding: 10px; background-color: lightgray; border-radius: 8px; margin-bottom: 20px;">
 				<form id="menuForm-control" style="display: flex; justify-content: space-evenly	; align-items: center;">
 					<div>
-						<label for="exampleSelect_control" style="font-size: medium;"><strong>Example:</strong></label>
+						<label for="exampleSelect_control" style="font-size: medium;"><strong>Choose a speech sample:</strong></label>
 						<select id="exampleSelect_control" onclick="applyChanges_control()" name="exampleSelect_control"  style="font-size: medium; margin-left: 10px;">
 							<option value="1">1</option>
 							<option value="2">2</option>
@@ -475,20 +361,19 @@
 					<div>
 						<div>
 							<label class="checkbox-label">
-        					<input type="checkbox" id="myCheckreverb" onclick="checkCheckbox_derverb()"> Dereverb
+        					<input type="checkbox" id="myCheckreverb" onclick="checkCheckbox_derverb()"> Turn on dereverberation
     						</label>
 						</div>
 					</div>
 					<div>
 						<div>
 							<label class="checkbox-label">
-        					<input type="checkbox" id="myChecksnr" onclick="checkCheckbox_denoise()"> Denoise
+        					<input type="checkbox" id="myChecksnr" onclick="checkCheckbox_denoise()"> Turn on denoising
     						</label>
 						</div>
 					</div>
 				</form>
 			</div>
-
 				<table style="width:100%; text-align: center;">
 					<td style="text-align: center;">
 						<audio id="control-audio" style="width: 50%" controls="controls" preload="none" src="demos/noise_reverb/example-1/1_noised.wav"></audio>
@@ -500,11 +385,9 @@
 
 
 		<!--		Voice conversion		-->
-		<span style="font-size: large; color: darkred"><strong>4- Voice Conversion</strong></span>
+		<span style="font-size: large; color: darkred"><strong>Voice conversion</strong></span>
 		<br>
-		AnCoGen functions as a voice conversion tool via the analysis-<u>control</u>-generation process between source signals and target signals. In the control step, we switch only the identity information from the target to the source signal, all other factors of variation of the source are preserved. 
 		<br>
-			<br>
 			<div style="width:100%; text-align: justify; border: 2px solid darkred; padding: 10px;">
 				<div style="text-align: center;">
 					<div style="display:grid; grid-auto-columns:1fr; gap: 15px; grid-template-columns: 1fr 0.75fr 1fr; grid-template-rows:auto;">
@@ -514,24 +397,23 @@
 					</div>
 				</div>
 				<br>
-				<br>
 				<table style="width:100%; text-align: center;">
 					<td style="text-align: center; border-right: solid 1px darkred;">
-						<p> <font size="+1">Target</font> </p>
-						<audio id="voice_conversion_target" style="width: 200px" controls="controls" preload="none" src="demos/voice_conversion/example_1/2-target_predicted.wav"></audio>
+						<p> <font size="+1">Target identity<sup> &#10033;</sup></font> </p>
+						<audio id="voice_conversion_target" style="width: 300px" controls="controls" preload="none" src="demos/voice_conversion/example_1/2-target_predicted.wav"></audio>
 					</td>
 
 					<td style="text-align: center; border-right: solid 1px darkred;">
-						<p> <font size="+1">Source</font> </p>
-						<audio id="voice_conversion_source" style="width: 200px" controls="controls" preload="none" src="demos/voice_conversion/example_1/1-source_predicted.wav"></audio>
+						<p> <font size="+1">Source signal<sup> &#10033;</sup></font> </p>
+						<audio id="voice_conversion_source" style="width: 300px" controls="controls" preload="none" src="demos/voice_conversion/example_1/1-source_predicted.wav"></audio>
 					</td>
 
 					<td style="text-align: center">
 						<p> <font size="+1">Voice conversion with AnCoGen</font> </p>
-						<audio id="voice_conversion_result" style="width: 200px" controls="controls" preload="none" src="demos/voice_conversion/example_1/3-source_to_target_predicted.wav"></audio>
+						<audio id="voice_conversion_result" style="width: 300px" controls="controls" preload="none" src="demos/voice_conversion/example_1/3-source_to_target_predicted.wav"></audio>
 					</td>
-
 				</table>
+				<sup> &#10033;</sup>The source and target signals have been through an analysis-resynthesis process with AnCoGen.
 			</div>
 			<br>
 

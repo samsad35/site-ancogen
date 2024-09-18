@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Speech Attributes Sliders</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Speech attributes</h1>
+        <div class="sliders">
+            <div class="slider-container">
+                <label for="pitch">Pitch</label>
+                <input type="range" id="pitch" min="0" max="100" value="50" class="slider">
+                <span id="pitchValue">50</span>
+            </div>
+            <div class="slider-container">
+                <label for="loudness">Loudness</label>
+                <input type="range" id="loudness" min="0" max="100" value="50" class="slider">
+                <span id="loudnessValue">50</span>
+            </div>
+            <div class="slider-container">
+                <label for="identity">Identity</label>
+                <input type="range" id="identity" min="0" max="100" value="50" class="slider">
+                <span id="identityValue">50</span>
+            </div>
+            <div class="slider-container">
+                <label for="content">Content</label>
+                <input type="range" id="content" min="0" max="100" value="50" class="slider">
+                <span id="contentValue">50</span>
+            </div>
+            <div class="slider-container">
+                <label for="snr">SNR</label>
+                <input type="range" id="snr" min="0" max="100" value="50" class="slider">
+                <span id="snrValue">50</span>
+            </div>
+            <div class="slider-container">
+                <label for="c50">C50</label>
+                <input type="range" id="c50" min="0" max="100" value="50" class="slider">
+                <span id="c50Value">50</span>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
